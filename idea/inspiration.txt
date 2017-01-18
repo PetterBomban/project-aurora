@@ -1,0 +1,2 @@
+-- proxima
+-- https://love2d.org/wiki/Pr%C3%B6xima
