@@ -15,8 +15,8 @@ function love.draw()
     love.graphics.draw(bg, 0, 0)
 
     -- debug draws --
-    local fps = love.timer.getFPS()
-    love.graphics.print("fps: " .. tostring(fps), 0, 1037)
+    -- fps
+    love.graphics.print("fps: " .. tostring(love.timer.getFPS()), 0, 1037)
 
     -- player
     Player:Draw()
@@ -24,4 +24,5 @@ end
 
 function love.update(dt)
     Player:Update(dt)
+    Keyboard:Update(dt)
 end

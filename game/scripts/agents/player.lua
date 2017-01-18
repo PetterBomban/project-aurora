@@ -9,8 +9,8 @@ local PlayerObj = {
     nX = 500,
     nY = 500,
     isMoving = false,
+    mode = "",
     waypoints = {
-        [1] = {x=500,y=500}
     }
 }
 local PlayerImg = {
@@ -20,6 +20,12 @@ local PlayerImg = {
 function Player:Update(dt)
     -- movement
     if PlayerObj.isMoving == true then
+        -- 
+        if PlayerObj.waypoints[1] ~= nil then
+            PlayerObj.nX = PlayerObj.waypoints[1].x
+            PlayerObj.nY = PlayerObj.waypoints[1].y
+        end
+
         -- rotate the player towards the target
         local angle =  Movement:GetAngle(PlayerObj, {x=PlayerObj.nX, y=PlayerObj.nY}, dt)
         local angle2 = lerp(PlayerObj.rotation, angle, dt)
@@ -27,7 +33,11 @@ function Player:Update(dt)
 
         -- this moves the player until it gets to its target (return true)
         if (Player:MoveTo({x=PlayerObj.nX, y=PlayerObj.nY}, dt)) == true then
-            PlayerObj.isMoving = false
+            if PlayerObj.waypoints[1] ~= nil then
+                Movement:RemoveWaypoint(PlayerObj, 1)
+            else
+                PlayerObj.isMoving = false
+            end
         end
     end
 end
@@ -48,6 +58,8 @@ function Player:Draw()
     -- next xy
     love.graphics.print("nX/nY: " .. tostring(PlayerObj.nX) .. "x" ..
                         tostring(PlayerObj.nY), 200, 0)
+    -- current mode
+    love.graphics.print("mode: " .. tostring(PlayerObj.mode), 350, 0)
 end --Draw
 
 function Player:MoveTo(target, dt)

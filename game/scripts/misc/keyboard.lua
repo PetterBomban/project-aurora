@@ -13,7 +13,9 @@ function Keyboard:Draw()
 end
 
 function Keyboard:Update(dt)
-    if love.keyboard.isDown("SHIFT") then
+    if love.keyboard.isDown("lshift") then
+        Player:SetValue("mode", "waypoint")
+    else
+        Player:SetValue("mode", "")
     end
-
 end
