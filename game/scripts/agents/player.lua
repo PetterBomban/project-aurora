@@ -9,6 +9,9 @@ local PlayerObj = {
     nX = 500,
     nY = 500,
     isMoving = false,
+    waypoints = {
+        [1] = {x=500,y=500}
+    }
 }
 local PlayerImg = {
     static = love.graphics.newImage('game/assets/player/playerStatic.png')
@@ -18,7 +21,10 @@ function Player:Update(dt)
     -- movement
     if PlayerObj.isMoving == true then
         -- rotate the player towards the target
-        PlayerObj.rotation = Movement:GetAngle(PlayerObj, {x=PlayerObj.nX, y=PlayerObj.nY}, dt)
+        local angle =  Movement:GetAngle(PlayerObj, {x=PlayerObj.nX, y=PlayerObj.nY}, dt)
+        local angle2 = lerp(PlayerObj.rotation, angle, dt)
+        PlayerObj.rotation = angle2
+
         -- this moves the player until it gets to its target (return true)
         if (Player:MoveTo({x=PlayerObj.nX, y=PlayerObj.nY}, dt)) == true then
             PlayerObj.isMoving = false
@@ -42,8 +48,7 @@ function Player:Draw()
     -- next xy
     love.graphics.print("nX/nY: " .. tostring(PlayerObj.nX) .. "x" ..
                         tostring(PlayerObj.nY), 200, 0)
-
-end
+end --Draw
 
 function Player:MoveTo(target, dt)
     return Movement:MoveTo(PlayerObj, target, dt)
@@ -55,4 +60,8 @@ end
 
 function Player:GetValue(key)
     return PlayerObj[key]
+end
+
+function Player:GetPlayer()
+    return PlayerObj
 end
