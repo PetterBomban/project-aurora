@@ -13,4 +13,7 @@ end
 
 function love.update(dt)
     Player:Update(dt)
+
+    wp = Movement:GetWaypoints(Player:GetPlayer())
+    print(Helper:DumpTable(wp))
 end

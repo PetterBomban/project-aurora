@@ -14,5 +14,6 @@ end
 
 function Keyboard:Update(dt)
     if love.keyboard.isDown("SHIFT") then
+    end
 
 end

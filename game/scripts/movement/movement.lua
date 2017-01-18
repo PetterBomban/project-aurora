@@ -1,7 +1,9 @@
 Movement = {}
 Movement.__index = Movement
 
--- returns the angle between two objects
+require('/game/scripts/movement/waypoints')
+
+-- returns the angle between two objects 
 function Movement:GetAngle(agent, target, dt)
     return math.atan2((target.x - agent.x), (agent.y - target.y))
 end
