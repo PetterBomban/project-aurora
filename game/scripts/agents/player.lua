@@ -2,8 +2,9 @@ Player = {}
 Player.__index = Player
 
 local PlayerObj = {
-    speed = 100,
+    speed = 200,
     rotation = 0,
+    rotationSpeed = 2,
     x = 500,
     y = 500,
     nX = 500,
@@ -28,7 +29,7 @@ function Player:Update(dt)
 
         -- rotate the player towards the target
         local angle =  Movement:GetAngle(PlayerObj, {x=PlayerObj.nX, y=PlayerObj.nY}, dt)
-        local angle2 = lerp(PlayerObj.rotation, angle, dt)
+        local angle2 = lerp(PlayerObj.rotation, angle, PlayerObj.rotationSpeed * dt) 
         PlayerObj.rotation = angle2
 
         -- this moves the player until it gets to its target (return true)
@@ -60,6 +61,8 @@ function Player:Draw()
                         tostring(PlayerObj.nY), 200, 0)
     -- current mode
     love.graphics.print("mode: " .. tostring(PlayerObj.mode), 350, 0)
+    --rotation
+    love.graphics.print("rot.: " .. tostring(PlayerObj.rotation), 400, 0)
 end --Draw
 
 function Player:MoveTo(target, dt)
