@@ -15,3 +15,20 @@ function Helper:DumpTable(o)
       return tostring(o)
    end
 end
+
+-- Recursively copies a table and its contents
+-- http://lua-users.org/wiki/CopyTable
+function Helper:DeepCopy(orig)
+    local orig_type = type(orig)
+    local copy
+    if orig_type == 'table' then
+        copy = {}
+        for orig_key, orig_value in next, orig, nil do
+            copy[Helper:DeepCopy(orig_key)] = Helper:DeepCopy(orig_value)
+        end
+        setmetatable(copy, Helper:DeepCopy(getmetatable(orig)))
+    else -- number, string, boolean, etc
+        copy = orig
+    end
+    return copy
+end
