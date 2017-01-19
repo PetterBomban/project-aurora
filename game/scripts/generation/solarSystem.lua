@@ -22,7 +22,7 @@ function SolSys:Draw(ss)
             y = 2,
         }
     end
-    
+
 end
 
 function SolSys:GenerateSolarSystem()
@@ -68,5 +68,5 @@ end
 
 function SolSys:GetOrbitalPos(orbital)
     local parentPos = orbital.parent
-    local oX = 
+    local oX = 1
 end

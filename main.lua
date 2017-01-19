@@ -23,7 +23,10 @@ function love.draw()
     love.graphics.print("fps: " .. tostring(love.timer.getFPS()), 0, 1037)
     -- waypoints
     love.graphics.print("wp: " .. Helper:DumpTable(Player:GetValue("waypoints")), 200, 1037)
-    
+    -- solar system
+    love.graphics.print("star: " .. Helper:DumpTable(SolarSystem.star), 0, 800)
+    love.graphics.print("orbitals: " .. Helper:DumpTable(SolarSystem.orbitals), 0, 820)
+
     Player:Draw()
     SolSys:Draw(SolarSystem)
 end
