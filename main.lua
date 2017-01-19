@@ -17,7 +17,8 @@ function love.draw()
     -- debug draws --
     -- fps
     love.graphics.print("fps: " .. tostring(love.timer.getFPS()), 0, 1037)
-
+    -- waypoints
+    love.graphics.print("wp: " .. Helper:DumpTable(Player:GetValue("waypoints")), 200, 1037)
     -- player
     Player:Draw()
 end
