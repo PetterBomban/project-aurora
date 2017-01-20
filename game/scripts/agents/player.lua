@@ -2,7 +2,7 @@ Player = {}
 Player.__index = Player
 
 local PlayerObj = {
-    speed = 200,
+    speed = 150,
     rotation = 0,
     rotationSpeed = 2,
     x = 500,

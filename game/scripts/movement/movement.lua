@@ -2,6 +2,7 @@ Movement = {}
 Movement.__index = Movement
 
 require('/game/scripts/movement/waypoints')
+require('/game/scripts/movement/rotate')
 
 -- returns the angle between two objects 
 function Movement:GetAngle(agent, target, dt)

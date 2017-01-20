@@ -4,6 +4,16 @@ SolSys.__index = SolSys
 function SolSys:Update(dt, ss)
     -- orbitaling parent
     local parentPos = ss.star
+    local orbitalPos = ss.orbital
+
+    for key, value in pairs(ss.orbitals) do
+        local orbital = ss.orbitals[key]
+        
+        local pos = Movement:RotateAround(parentPos, orbital, orbital.orbitalSpeed, dt)
+
+        ss.orbitals[key].x = pos.x
+        ss.orbitals[key].y = pos.y
+    end
     
 end
 
@@ -22,7 +32,6 @@ function SolSys:Draw(ss)
         -- spawn planets
         love.graphics.circle("fill", orbital.x, orbital.y, 30, 100)
     end
-
 end
 
 function SolSys:GenerateSolarSystem()
@@ -38,6 +47,7 @@ function SolSys:GenerateSolarSystem()
     local i = 1
     while(i <= numOrbitals) do
         local orbital = SolSys:GenerateOrbital(star)
+        orbital.orbitalSpeed = math.prandom(0.0001, 0.001)
         table.insert(SolarSystem.orbitals, orbital)
         i = i + 1
     end
@@ -56,7 +66,7 @@ function SolSys:GenerateOrbital(parent)
     local height = love.graphics.getHeight()
     local x = math.random(100, 900)
     local y = math.random(100, 900)
-    local orbitalSpeed = 30 -- seconds
+    local orbitalSpeed = 1 -- this gets changed 
     local orbitalRadius = 1
 
     local OrbitalObj = {
