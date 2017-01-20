@@ -4,7 +4,7 @@ Player.__index = Player
 local PlayerObj = {
     speed = 150,
     rotation = 0,
-    rotationSpeed = 2,
+    rotationSpeed = 4,
     x = 500,
     y = 500,
     nX = 500,
@@ -29,8 +29,8 @@ function Player:Update(dt)
 
         -- rotate the player towards the target
         local angle =  Movement:GetAngle(PlayerObj, {x=PlayerObj.nX, y=PlayerObj.nY}, dt)
-        local angle2 = lerp(PlayerObj.rotation, angle, PlayerObj.rotationSpeed * dt) 
-        PlayerObj.rotation = angle2
+        --local angle2 = lerp(PlayerObj.rotation, angle, PlayerObj.rotationSpeed * dt) 
+        PlayerObj.rotation = angle
 
         -- this moves the player until it gets to its target (return true)
         if (Player:MoveTo({x=PlayerObj.nX, y=PlayerObj.nY}, dt)) == true then
@@ -46,7 +46,7 @@ end
 function Player:Draw()
     -- static image
     love.graphics.draw(PlayerImg.static,PlayerObj.x, PlayerObj.y,
-                        PlayerObj.rotation, 1, 1,
+                        PlayerObj.rotation, 0.2, 0.2,
                         PlayerImg.static:getWidth()/2,
                         PlayerImg.static:getHeight()/2)
 
