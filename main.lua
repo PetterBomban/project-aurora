@@ -1,3 +1,6 @@
+-- Set random seed
+math.randomseed(os.time())
+
 function love.load()
     require('game/lib/generalMath')
     require('game/scripts/misc/helpers')

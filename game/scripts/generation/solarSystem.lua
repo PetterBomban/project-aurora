@@ -2,6 +2,8 @@ SolSys = {}
 SolSys.__index = SolSys
 
 function SolSys:Update(dt, ss)
+    -- orbitaling parent
+    local parentPos = ss.star
     
 end
 
@@ -17,10 +19,8 @@ function SolSys:Draw(ss)
 
     for key, value in pairs(orbitals) do
         local orbital = orbitals[key]
-        local orbitalPos = {
-            x = 1,
-            y = 2,
-        }
+        -- spawn planets
+        love.graphics.circle("fill", orbital.x, orbital.y, 30, 100)
     end
 
 end
@@ -34,12 +34,11 @@ function SolSys:GenerateSolarSystem()
 
     -- generate a random number of orbitals, with the star
     -- as their parent.
-    local numOrbitals = math.random(1,8)
+    local numOrbitals = math.random(1, 8)
     local i = 1
     while(i <= numOrbitals) do
         local orbital = SolSys:GenerateOrbital(star)
         table.insert(SolarSystem.orbitals, orbital)
-
         i = i + 1
     end
 
@@ -53,14 +52,18 @@ function SolSys:GenerateStar(coordinates)
 end
 
 function SolSys:GenerateOrbital(parent)
-    local orbitalTime = 30 -- seconds
-    local orbitalAngle = 0 -- "north"
-    local orbitalRadius = math.random(100, 600) --px
+    local width = love.graphics.getWidth()
+    local height = love.graphics.getHeight()
+    local x = math.random(100, 900)
+    local y = math.random(100, 900)
+    local orbitalSpeed = 30 -- seconds
+    local orbitalRadius = 1
 
     local OrbitalObj = {
+        x = x,
+        y = y,
         parent = parent,
-        orbitalTime = orbitalTime,
-        orbitalAngle = orbitalAngle,
+        orbitalSpeed = orbitalSpeed,
         orbitalRadius = orbitalRadius,
     }
     return OrbitalObj
@@ -70,3 +73,4 @@ function SolSys:GetOrbitalPos(orbital)
     local parentPos = orbital.parent
     local oX = 1
 end
+
